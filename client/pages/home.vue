@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import guestPage from '~/mixins/authenticated-page'
+import authenticatedPage from '~/mixins/authenticated-page'
 
 export default {
-  mixins: [guestPage],
+  mixins: [authenticatedPage],
   layout: 'default',
   head () {
     return { title: this.$t('home') }

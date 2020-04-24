@@ -38,13 +38,13 @@ module.exports = {
   ],
 
   plugins: [
-    '~components/global',
     '~plugins/i18n',
     '~plugins/vform',
     '~plugins/axios',
     '~plugins/fontawesome',
     '~plugins/nuxt-client-init', // Comment this for SSR
-    { src: '~plugins/bootstrap', mode: 'client' }
+    { src: '~plugins/bootstrap', mode: 'client' },
+    '~plugins/register-global-components'
   ],
 
   modules: [

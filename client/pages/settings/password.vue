@@ -1,44 +1,37 @@
 <template>
-  <card :title="$t('your_password')">
+  <div>
     <form @submit.prevent="update" @keydown="form.onKeydown($event)">
       <alert-success :form="form" :message="$t('password_updated')" />
 
       <!-- Password -->
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('new_password') }}</label>
-        <div class="col-md-7">
-          <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" type="password" name="password" class="form-control">
-          <has-error :form="form" field="password" />
-        </div>
-      </div>
+      <v-text-field v-model="form.password" :label="$t('new_password')" type="password" name="password" />
+      <has-error :form="form" field="password" />
 
       <!-- Password Confirmation -->
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('confirm_password') }}</label>
-        <div class="col-md-7">
-          <input v-model="form.password_confirmation" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" type="password" name="password_confirmation" class="form-control">
-          <has-error :form="form" field="password_confirmation" />
-        </div>
-      </div>
+      <v-text-field v-model="form.password_confirmation" :label="$t('confirm_password')" type="password" name="password" />
+      <has-error :form="form" field="password_confirmation" />
 
       <!-- Submit Button -->
-      <div class="form-group row">
-        <div class="col-md-9 ml-md-auto">
-          <v-button :loading="form.busy" type="success">
+      <div class="d-flex">
+        <div class="ml-md-auto">
+          <v-btn :loading="form.busy" type="submit" color="success">
+            <v-icon left>
+              mdi-content-save
+            </v-icon>
             {{ $t('update') }}
-          </v-button>
+          </v-btn>
         </div>
       </div>
     </form>
-  </card>
+  </div>
 </template>
 
 <script>
 import Form from 'vform'
-import guestPage from '~/mixins/authenticated-page'
+import authenticatedPage from '~/mixins/authenticated-page'
 
 export default {
-  mixins: [guestPage],
+  mixins: [authenticatedPage],
   scrollToTop: false,
 
   head () {

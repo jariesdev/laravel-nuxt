@@ -1,30 +1,30 @@
 <template>
-  <div class="row">
-    <div class="col-md-3">
-      <card :title="$t('settings')" class="settings-card">
+  <v-row>
+    <v-col cols="12">
+      <v-card :title="$t('settings')" class="settings-card">
+        <v-toolbar color="primary" dark>
+          <v-toolbar-title>{{ $t('settings') }}</v-toolbar-title>
+        </v-toolbar>
         <v-tabs>
-          <v-tab v-for="tab in tabs" :key="tab.route">
-            <router-link :to="{ name: tab.route }" class="text-decoration-none">
-              {{ tab.name }}
-            </router-link>
+          <v-tab v-for="tab in tabs" :key="tab.route" :to="{ name: tab.route }" class="text-decoration-none">
+            {{ tab.name }}
           </v-tab>
         </v-tabs>
-      </card>
-    </div>
-
-    <div class="col-md-9">
-      <transition name="fade" mode="out-in">
-        <router-view />
-      </transition>
-    </div>
-  </div>
+        <v-card-text>
+          <transition name="fade" mode="out-in">
+            <router-view />
+          </transition>
+        </v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
-import guestPage from '~/mixins/authenticated-page'
+import authenticatedPage from '~/mixins/authenticated-page'
 
 export default {
-  mixins: [guestPage],
+  mixins: [authenticatedPage],
 
   computed: {
     tabs () {

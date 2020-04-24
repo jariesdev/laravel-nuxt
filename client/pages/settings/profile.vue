@@ -1,45 +1,36 @@
 <template>
-  <card :title="$t('your_info')">
-    <form @submit.prevent="update" @keydown="form.onKeydown($event)">
-      <alert-success :form="form" :message="$t('info_updated')" />
+  <form @submit.prevent="update" @keydown="form.onKeydown($event)">
+    <alert-success :form="form" :message="$t('info_updated')" />
 
-      <!-- Name -->
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('name') }}</label>
-        <div class="col-md-7">
-          <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" type="text" name="name" class="form-control">
-          <has-error :form="form" field="name" />
-        </div>
-      </div>
+    <!-- Name -->
+    <v-text-field v-model="form.name" :label="$t('name')" type="text" name="name" />
+    <has-error :form="form" field="name" />
 
-      <!-- Email -->
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
-        <div class="col-md-7">
-          <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" type="email" name="email" class="form-control">
-          <has-error :form="form" field="email" />
-        </div>
-      </div>
+    <!-- Email -->
+    <v-text-field v-model="form.email" :label="$t('email')" type="email" name="name" />
+    <has-error :form="form" field="email" />
 
-      <!-- Submit Button -->
-      <div class="form-group row">
-        <div class="col-md-9 ml-md-auto">
-          <v-button :loading="form.busy" type="success">
-            {{ $t('update') }}
-          </v-button>
-        </div>
+    <!-- Submit Button -->
+    <div class="d-flex">
+      <div class="ml-md-auto">
+        <v-btn :loading="form.busy" type="submit" color="success">
+          <v-icon left>
+            mdi-content-save
+          </v-icon>
+          {{ $t('update') }}
+        </v-btn>
       </div>
-    </form>
-  </card>
+    </div>
+  </form>
 </template>
 
 <script>
 import Form from 'vform'
 import { mapGetters } from 'vuex'
-import guestPage from '~/mixins/authenticated-page'
+import authenticatedPage from '~/mixins/authenticated-page'
 
 export default {
-  mixins: [guestPage],
+  mixins: [authenticatedPage],
   scrollToTop: false,
 
   head () {

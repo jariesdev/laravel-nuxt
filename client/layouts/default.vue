@@ -6,6 +6,7 @@
       :clipped="clipped"
       fixed
       app
+      permanent
     >
       <v-list>
         <v-list-item
@@ -14,13 +15,13 @@
           :to="item.to"
           router
           exact
+          class="text-decoration-none"
         >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title v-text="item.title" />
-            <span>{{ item.title }}</span>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -30,6 +31,7 @@
       :clipped-left="clipped"
       fixed
       app
+      dense
     >
       <v-btn
         icon
@@ -105,11 +107,11 @@ export default {
         {
           icon: 'mdi-chart-bubble',
           title: 'Inspire',
-          to: '/employee/inspire'
+          to: '/settings'
         }
       ],
       right: true,
-      rightDrawer: true,
+      rightDrawer: false,
       title: 'MDIS Reports'
     }
   }
