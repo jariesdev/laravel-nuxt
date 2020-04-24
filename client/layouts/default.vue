@@ -1,11 +1,12 @@
 <template>
-  <v-app>
+  <v-app dark>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
       fixed
       app
+      permanent
     >
       <v-list>
         <v-list-item
@@ -14,13 +15,13 @@
           :to="item.to"
           router
           exact
+          class="text-decoration-none"
         >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title v-text="item.title" />
-            <span>{{ item.title }}</span>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -30,6 +31,7 @@
       :clipped-left="clipped"
       fixed
       app
+      dense
     >
       <v-btn
         icon
@@ -43,8 +45,11 @@
         icon
         @click.stop="rightDrawer = !rightDrawer"
       >
-        <v-icon>mdi-menu</v-icon>
+        <v-icon>mdi-bell</v-icon>
       </v-btn>
+
+      <account-menu/>
+
     </v-app-bar>
 
     <v-content>
@@ -57,6 +62,7 @@
       v-model="rightDrawer"
       :right="right"
       temporary
+      fixed
     >
       <v-list>
         <v-list-item @click.native="right = !right">
@@ -80,12 +86,18 @@
 </template>
 
 <script>
+import AccountMenu from '../components/top-bar/AccountMenu'
+
 export default {
+  components: {
+    AccountMenu
+  },
   data () {
     return {
-      clipped: true,
+      clipped: false,
       drawer: true,
-      fixed: false,
+      fixed: true,
+      miniVariant: true,
       items: [
         {
           icon: 'mdi-apps',
@@ -95,10 +107,9 @@ export default {
         {
           icon: 'mdi-chart-bubble',
           title: 'Inspire',
-          to: '/employee/inspire'
+          to: '/settings'
         }
       ],
-      miniVariant: true,
       right: true,
       rightDrawer: false,
       title: 'MDIS Reports'

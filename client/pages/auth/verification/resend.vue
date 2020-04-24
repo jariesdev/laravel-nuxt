@@ -30,10 +30,11 @@
 
 <script>
 import Form from 'vform'
+import guestPage from '~/mixins/guest-page'
 
 export default {
-  middleware: 'guest',
-
+  mixins: [guestPage],
+  layout: 'auth',
   metaInfo () {
     return { title: this.$t('verify_email') }
   },
