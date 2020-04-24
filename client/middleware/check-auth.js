@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default async ({ store, req }) => {
+export default async ({ store, req, redirect }) => {
   const token = store.getters['auth/token']
 
   if (process.server) {

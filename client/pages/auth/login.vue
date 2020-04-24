@@ -1,64 +1,89 @@
 <template>
-  <div class="row">
-    <div class="col-lg-8 m-auto">
-      <card :title="$t('login')">
-        <form @submit.prevent="login" @keydown="form.onKeydown($event)">
-          <!-- Email -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" type="email" name="email" class="form-control">
-              <has-error :form="form" field="email" />
-            </div>
-          </div>
+  <v-app>
+    <v-content>
+      <v-container
+        class="fill-height"
+        fluid
+      >
+        <v-row
+          align="center"
+          justify="center"
+        >
+          <v-col
+            cols="12"
+            sm="8"
+            md="4"
+          >
+            <v-card class="elevation-12">
+              <v-toolbar
+                color="primary"
+                dark
+                flat
+              >
+                <v-toolbar-title>Login form</v-toolbar-title>
+              </v-toolbar>
+              <v-card-text>
+                <v-form @submit.prevent="login" @keydown="form.onKeydown($event)">
+                  <v-text-field
+                    v-model="form.email"
+                    :label="$t('email')"
+                    name="login"
+                    prepend-icon="mdi-account"
+                    type="email"
+                    :class="{ 'is-invalid': form.errors.has('email') }"
+                  />
+                  <has-error :form="form" field="email" />
 
-          <!-- Password -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('password') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" type="password" name="password" class="form-control">
-              <has-error :form="form" field="password" />
-            </div>
-          </div>
+                  <v-text-field
+                    id="password"
+                    v-model="form.password"
+                    :label="$t('password')"
+                    name="password"
+                    prepend-icon="mdi-lock"
+                    type="password"
+                    :class="{ 'is-invalid': form.errors.has('password') }"
+                  />
+                  <has-error :form="form" field="password" />
 
-          <!-- Remember Me -->
-          <div class="form-group row">
-            <div class="col-md-3" />
-            <div class="col-md-7 d-flex">
-              <checkbox v-model="remember" name="remember">
-                {{ $t('remember_me') }}
-              </checkbox>
+                  <!-- Remember Me -->
+                  <v-row no-gutters class="form-group" align="center" justify="space-between">
+                    <v-col>
+                      <v-checkbox v-model="remember" name="remember" :label="$t('remember_me')"></v-checkbox>
+                    </v-col>
+                    <v-col class="text-right">
+                      <router-link :to="{ name: 'password.request' }" class="small ml-auto my-auto">
+                        {{ $t('forgot_password') }}
+                      </router-link>
+                    </v-col>
+                  </v-row>
+                </v-form>
 
-              <router-link :to="{ name: 'password.request' }" class="small ml-auto my-auto">
-                {{ $t('forgot_password') }}
-              </router-link>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-md-7 offset-md-3 d-flex">
-              <!-- Submit Button -->
-              <v-button :loading="form.busy">
-                {{ $t('login') }}
-              </v-button>
-
-              <!-- GitHub Login Button -->
-              <login-with-github />
-            </div>
-          </div>
-        </form>
-      </card>
-    </div>
-  </div>
+                <v-card-actions>
+                  <v-spacer />
+                  <v-btn color="primary" @click="login">
+                    <v-icon>mdi-key</v-icon>
+                    Login
+                  </v-btn>
+                </v-card-actions>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
 import Form from 'vform'
 
 export default {
+  layout: 'auth',
   head () {
     return { title: this.$t('login') }
   },
+
+  props: { },
 
   data: () => ({
     form: new Form({

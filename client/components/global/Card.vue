@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card xxx">
     <div v-if="title" class="card-header">
       {{ title }}
     </div>

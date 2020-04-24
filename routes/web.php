@@ -12,5 +12,5 @@
 */
 
 Route::get('{path}', function () {
-    return file_get_contents(public_path('_nuxt/index.html'));
+    return file_get_contents(public_path('index.html'));
 })->where('path', '(.*)');
