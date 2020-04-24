@@ -27,11 +27,13 @@
 
 <script>
 import axios from 'axios'
+import guestPage from '~/mixins/guest-page'
 
 const qs = params => Object.keys(params).map(key => `${key}=${params[key]}`).join('&')
 
 export default {
-  middleware: 'guest',
+  mixins: [guestPage],
+  layout: 'auth',
 
   metaInfo () {
     return { title: this.$t('verify_email') }

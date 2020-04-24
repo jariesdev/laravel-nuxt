@@ -48,8 +48,11 @@
 
 <script>
 import Form from 'vform'
+import guestPage from '~/mixins/guest-page'
 
 export default {
+  mixins: [guestPage],
+  layout: 'auth',
   head () {
     return { title: this.$t('reset_password') }
   },

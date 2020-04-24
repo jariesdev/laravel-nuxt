@@ -21,8 +21,10 @@
 </template>
 
 <script>
+import guestPage from '~/mixins/authenticated-page'
+
 export default {
-  middleware: 'auth',
+  mixins: [guestPage],
 
   computed: {
     tabs () {

@@ -5,9 +5,11 @@
 </template>
 
 <script>
-export default {
-  middleware: 'auth',
+import guestPage from '~/mixins/authenticated-page'
 
+export default {
+  mixins: [guestPage],
+  layout: 'default',
   head () {
     return { title: this.$t('home') }
   }

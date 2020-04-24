@@ -35,8 +35,10 @@
 
 <script>
 import Form from 'vform'
+import guestPage from '~/mixins/authenticated-page'
 
 export default {
+  mixins: [guestPage],
   scrollToTop: false,
 
   head () {

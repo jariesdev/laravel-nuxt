@@ -3,7 +3,7 @@ const { join } = require('path')
 const { copySync, removeSync } = require('fs-extra')
 
 module.exports = {
-  //mode: 'spa', // Comment this for SSR
+  mode: 'spa', // Comment this for SSR
 
   srcDir: __dirname,
 
@@ -52,15 +52,12 @@ module.exports = {
   ],
 
   build: {
-    extractCSS: true
+    extractCSS: true,
+    extend (config) {}
   },
 
   hooks: {
     generate: {
-      dir: 'dist2',
-      before(nuxt, generateOptions){
-        console.log(nuxt, generateOptions)
-      },
       done (generator) {
         // Copy dist files to public/_nuxt
         if (generator.nuxt.options.dev === false && generator.nuxt.options.mode === 'spa') {

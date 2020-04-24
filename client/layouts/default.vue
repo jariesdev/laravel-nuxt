@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app dark>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -43,8 +43,11 @@
         icon
         @click.stop="rightDrawer = !rightDrawer"
       >
-        <v-icon>mdi-menu</v-icon>
+        <v-icon>mdi-bell</v-icon>
       </v-btn>
+
+      <account-menu/>
+
     </v-app-bar>
 
     <v-content>
@@ -57,6 +60,7 @@
       v-model="rightDrawer"
       :right="right"
       temporary
+      fixed
     >
       <v-list>
         <v-list-item @click.native="right = !right">
@@ -80,12 +84,18 @@
 </template>
 
 <script>
+import AccountMenu from '../components/top-bar/AccountMenu'
+
 export default {
+  components: {
+    AccountMenu
+  },
   data () {
     return {
-      clipped: true,
+      clipped: false,
       drawer: true,
-      fixed: false,
+      fixed: true,
+      miniVariant: true,
       items: [
         {
           icon: 'mdi-apps',
@@ -98,9 +108,8 @@ export default {
           to: '/employee/inspire'
         }
       ],
-      miniVariant: true,
       right: true,
-      rightDrawer: false,
+      rightDrawer: true,
       title: 'MDIS Reports'
     }
   }
